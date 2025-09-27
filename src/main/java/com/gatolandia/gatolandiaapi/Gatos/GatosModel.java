@@ -21,7 +21,7 @@ public class GatosModel {
 
     private String cor;
 
-    private String raça;
+    private String raca;
 
     private int idade;
 
