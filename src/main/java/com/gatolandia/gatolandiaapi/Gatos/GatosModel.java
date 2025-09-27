@@ -7,7 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "tb_cadasto")
+@Table(name = "tb_gatos")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
