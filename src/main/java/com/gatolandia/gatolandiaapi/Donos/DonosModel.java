@@ -31,7 +31,7 @@ public class DonosModel {
     @Column(unique = true)
     private String celular;
 
-    private int quantosGatos;
+    private boolean possuiGatos;
 
     @OneToMany(mappedBy = "donos")
     private List <GatosModel> listaGatos;
