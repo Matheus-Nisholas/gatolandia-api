@@ -17,12 +17,16 @@ public class DonosModel {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
     private long id;
 
+    @Column(name = "nome")
     private String nome;
 
+    @Column(name = "idade")
     private int idade;
 
+    @Column(name = "endereco")
     private String endereco;
 
     @Column(unique = true)
@@ -31,6 +35,7 @@ public class DonosModel {
     @Column(unique = true)
     private String celular;
 
+    @Column(name = "possuiGatos")
     private boolean possuiGatos;
 
     @OneToMany(mappedBy = "donos")
