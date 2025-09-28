@@ -6,26 +6,26 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping
 public class GatosController {
 
-    @GetMapping("/gatos")
+    @GetMapping("gatos/gatos")
     public String gatos() {return "Gatos";}
 
     // CREATE
-    @PostMapping("/adicionar")
+    @PostMapping("gatos/adicionar")
     public String criar() {return "Adicionar Gato";}
     // READ
-    @GetMapping("/mostrar")
+    @GetMapping("gatos/mostrar")
     public String mostrar() {return "Mostrar Gato";}
 
     // READ POR ID
-    @GetMapping("/mostrarId")
+    @GetMapping("gatos/mostrarId")
     public String mostrarId() {return "Mostrar Gato por ID";}
 
     // UPDATE
-    @PutMapping("/editar")
+    @PutMapping("gatos/editar")
     public String editar() {return "Editar Gato";}
 
     // DELETE
-    @DeleteMapping("excluirId")
+    @DeleteMapping("gatos/excluirId")
     public String excluir() {return "Excluir Gato pelo ID";}
 
 }
