@@ -6,22 +6,19 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping
 public class DonosController {
 
-    @GetMapping("donos/donos")
-    public String donos() {return "Donos";}
+    @GetMapping("donos/exibir")
+    public String exibirDonos() {return "Donos";}
 
     @PostMapping("donos/adicionar")
-    public String criar() {return "Adicionar Dono";}
+    public String adicionarDonos() {return "Adicionar Dono";}
 
-    @GetMapping("donos/mostrar")
-    public String mostrar() {return "Mostrar Donos";}
-
-    @GetMapping("donos/mostraId")
-    public String mostraId() {return "Mostrar Dono por ID";}
+    @GetMapping("donos/exibirPorId")
+    public String exibirDonosPorId() {return "Mostrar Dono por ID";}
 
     @PutMapping("donos/editar")
-    public String editar() {return "Editar Dono";}
+    public String editarDonos() {return "Editar Dono";}
 
     @DeleteMapping("donos/excluirId")
-    public String excluir() {return "Excluir Dono pelo ID";}
+    public String excluirDonosPorId() {return "Excluir Dono pelo ID";}
 
 }
