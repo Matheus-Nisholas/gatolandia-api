@@ -1,5 +1,6 @@
 package com.gatolandia.gatolandiaapi.Donos;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.gatolandia.gatolandiaapi.Gatos.GatosModel;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -38,6 +39,7 @@ public class DonosModel {
     @Column(name = "possuiGatos")
     private boolean possuiGatos;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "donos")
     private List <GatosModel> listaGatos;
 
