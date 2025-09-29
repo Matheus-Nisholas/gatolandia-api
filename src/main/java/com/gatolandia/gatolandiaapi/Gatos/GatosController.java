@@ -22,8 +22,10 @@ public class GatosController {
     @PostMapping("gatos/adicionar")
     public String adicionarGatos() {return "Adicionar Gato";}
 
-    @GetMapping("gatos/exibirPorid")
-    public String exibirGatosPorId() {return "Mostrar Gato";}
+    @GetMapping("gatos/exibir/{id}")
+    public GatosModel exibirGatosPorId(@PathVariable Long id) {
+        return gatosRepository.findById(id).orElse(null);
+        }
 
     @PutMapping("gatos/editar")
     public String editarGatos() {return "Editar Gato";}

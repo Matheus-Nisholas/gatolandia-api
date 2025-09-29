@@ -3,6 +3,8 @@ package com.gatolandia.gatolandiaapi.Gatos;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.OptionalInt;
 
 @Service
 public class GatosService {
@@ -17,5 +19,9 @@ public class GatosService {
         return gatosRepository.findAll();
     }
 
+    public GatosModel exibirPorId(long id) {
+        Optional<GatosModel> exibirPorId = gatosRepository.findById(id);
+        return exibirPorId.orElse(null);
+    }
 
 }
