@@ -24,4 +24,8 @@ public class GatosService {
         return exibirPorId.orElse(null);
     }
 
+    public GatosModel adicionarGatos(GatosModel gatos) {
+        return gatosRepository.save(gatos);
+    }
+
 }

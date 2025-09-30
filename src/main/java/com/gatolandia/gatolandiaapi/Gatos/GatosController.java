@@ -8,23 +8,25 @@ import java.util.List;
 @RequestMapping
 public class GatosController {
 
-    private GatosRepository gatosRepository;
+    private GatosRepository gatosService;
 
-    public GatosController(GatosRepository gatosRepository) {
-        this.gatosRepository = gatosRepository;
+    public GatosController(GatosRepository gatosService) {
+        this.gatosService = gatosService;
     }
 
     @GetMapping("gatos/exibir")
     public List<GatosModel> exibirGatos() {
-        return gatosRepository.findAll();
+        return gatosService.findAll();
     }
 
     @PostMapping("gatos/adicionar")
-    public String adicionarGatos() {return "Adicionar Gato";}
+    public GatosModel adicionarGatos(@RequestBody GatosModel gatos) {
+            return  gatosService.save(gatos);
+    }
 
     @GetMapping("gatos/exibir/{id}")
     public GatosModel exibirGatosPorId(@PathVariable Long id) {
-        return gatosRepository.findById(id).orElse(null);
+        return gatosService.findById(id).orElse(null);
         }
 
     @PutMapping("gatos/editar")
