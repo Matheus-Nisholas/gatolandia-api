@@ -28,4 +28,8 @@ public class GatosService {
         return gatosRepository.save(gatos);
     }
 
+    public void excluirGatosPorId(long id) {
+      gatosRepository.deleteById(id);
+    }
+
 }

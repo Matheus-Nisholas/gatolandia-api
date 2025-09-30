@@ -8,31 +8,35 @@ import java.util.List;
 @RequestMapping
 public class GatosController {
 
-    private GatosRepository gatosService;
+    private final GatosService gatosService;
+    private GatosRepository gatosRepository;
 
-    public GatosController(GatosRepository gatosService) {
+    public GatosController(GatosRepository gatosRepository, GatosService gatosService) {
+        this.gatosRepository = gatosRepository;
         this.gatosService = gatosService;
     }
 
     @GetMapping("gatos/exibir")
     public List<GatosModel> exibirGatos() {
-        return gatosService.findAll();
+        return gatosService.listarGatos();
     }
 
     @PostMapping("gatos/adicionar")
     public GatosModel adicionarGatos(@RequestBody GatosModel gatos) {
-            return  gatosService.save(gatos);
+            return gatosService.adicionarGatos(gatos);
     }
 
     @GetMapping("gatos/exibir/{id}")
     public GatosModel exibirGatosPorId(@PathVariable Long id) {
-        return gatosService.findById(id).orElse(null);
+        return gatosService.exibirPorId(id);
         }
 
     @PutMapping("gatos/editar")
     public String editarGatos() {return "Editar Gato";}
 
-    @DeleteMapping("gatos/excluirId")
-    public String excluirGatosPorI() {return "Excluir Gato pelo ID";}
+    @DeleteMapping("gatos/excluir/{id}")
+    public void excluirGatosPorId(@PathVariable Long id) {
+      gatosService.excluirGatosPorId(id);
+    }
 
 }
