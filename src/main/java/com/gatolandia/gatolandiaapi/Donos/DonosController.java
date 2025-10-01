@@ -23,7 +23,9 @@ public class DonosController {
     public String adicionarDonos() {return "Adicionar Dono";}
 
     @GetMapping("donos/exibirPorId")
-    public String exibirDonosPorId() {return "Mostrar Dono por ID";}
+    public DonosModel exibirDonosPorId(Long id) {
+        return donosService.exibirDonoPorId(id);
+    }
 
     @PutMapping("donos/editar")
     public String editarDonos() {return "Editar Dono";}

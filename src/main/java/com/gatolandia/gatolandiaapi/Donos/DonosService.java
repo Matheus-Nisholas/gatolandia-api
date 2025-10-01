@@ -16,4 +16,8 @@ public class DonosService {
     public List<DonosModel> exibirDonos(){
          return donosRepository.findAll();
     }
+
+    public DonosModel exibirDonoPorId(long id){
+        return donosRepository.findById(id).orElse(null);
+    }
 }
