@@ -24,16 +24,16 @@ public class DonosController {
         return donosService.adicionarDonos(donosModel);
     }
 
-    @GetMapping("donos/exibirPorId")
-    public DonosModel exibirDonosPorId(Long id) {
+    @GetMapping("donos/exibir/{id}")
+    public DonosModel exibirDonosPorId(@PathVariable Long id) {
         return donosService.exibirDonoPorId(id);
     }
 
     @PutMapping("donos/editar")
     public String editarDonos() {return "Editar Dono";}
 
-    @DeleteMapping("donos/excluirId")
-    public void excluirDonosPorId(Long id) {
+    @DeleteMapping("donos/excluir/{id}")
+    public void excluirDonosPorId(@PathVariable Long id) {
         donosService.deletarDonosPorId(id);
     }
 
