@@ -20,7 +20,7 @@ public class DonosController {
     }
 
     @PostMapping("donos/adicionar")
-    public DonosModel adicionarDonos(DonosModel donosModel) {
+    public DonosModel adicionarDonos(@RequestBody DonosModel donosModel) {
         return donosService.adicionarDonos(donosModel);
     }
 
