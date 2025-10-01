@@ -32,4 +32,8 @@ public class GatosService {
       gatosRepository.deleteById(id);
     }
 
+    public GatosModel atualizarGatos(GatosModel gatos) {
+        return null;
+    }
+
 }

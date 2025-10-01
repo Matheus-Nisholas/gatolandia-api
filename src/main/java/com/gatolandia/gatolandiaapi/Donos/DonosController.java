@@ -2,12 +2,22 @@ package com.gatolandia.gatolandiaapi.Donos;
 
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping
 public class DonosController {
 
+    private final DonosService donosService;
+
+    public DonosController(DonosService donosService) {
+        this.donosService = donosService;
+    }
+
     @GetMapping("donos/exibir")
-    public String exibirDonos() {return "Donos";}
+    public List<DonosModel> exibirDonos() {
+        return donosService.exibirDonos();
+    }
 
     @PostMapping("donos/adicionar")
     public String adicionarDonos() {return "Adicionar Dono";}
