@@ -20,7 +20,9 @@ public class DonosController {
     }
 
     @PostMapping("donos/adicionar")
-    public String adicionarDonos() {return "Adicionar Dono";}
+    public DonosModel adicionarDonos(DonosModel donosModel) {
+        return donosService.adicionarDonos(donosModel);
+    }
 
     @GetMapping("donos/exibirPorId")
     public DonosModel exibirDonosPorId(Long id) {

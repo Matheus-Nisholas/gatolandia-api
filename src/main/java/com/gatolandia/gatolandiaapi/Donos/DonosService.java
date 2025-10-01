@@ -24,4 +24,8 @@ public class DonosService {
     public void deletarDonosPorId(long id){
         donosRepository.deleteById(id);
     }
+
+    public DonosModel adicionarDonos(DonosModel donosModel){
+        return donosRepository.save(donosModel);
+    }
 }
