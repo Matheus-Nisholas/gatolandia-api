@@ -20,4 +20,8 @@ public class DonosService {
     public DonosModel exibirDonoPorId(long id){
         return donosRepository.findById(id).orElse(null);
     }
+
+    public void deletarDonosPorId(long id){
+        donosRepository.deleteById(id);
+    }
 }

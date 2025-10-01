@@ -31,6 +31,8 @@ public class DonosController {
     public String editarDonos() {return "Editar Dono";}
 
     @DeleteMapping("donos/excluirId")
-    public String excluirDonosPorId() {return "Excluir Dono pelo ID";}
+    public void excluirDonosPorId(Long id) {
+        donosService.deletarDonosPorId(id);
+    }
 
 }
