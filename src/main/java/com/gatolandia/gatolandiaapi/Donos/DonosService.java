@@ -28,4 +28,12 @@ public class DonosService {
     public DonosModel adicionarDonos(DonosModel donosModel){
         return donosRepository.save(donosModel);
     }
+
+    public DonosModel editarDono(DonosModel donoAtualizado, long id){
+    if (donosRepository.existsById(id)){
+        donoAtualizado.setId(id);
+        return donosRepository.save(donoAtualizado);
+    } else {
+        return null;}
+    }
 }

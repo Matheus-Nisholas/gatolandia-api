@@ -29,12 +29,13 @@ public class DonosController {
         return donosService.exibirDonoPorId(id);
     }
 
-    @PutMapping("donos/editar")
-    public String editarDonos() {return "Editar Dono";}
+    @PutMapping("donos/editar/{id}")
+    public DonosModel editarDonos(@RequestBody DonosModel donoAtualizado, @PathVariable Long id) {
+        return donosService.editarDono(donoAtualizado, id);
+    }
 
     @DeleteMapping("donos/excluir/{id}")
     public void excluirDonosPorId(@PathVariable Long id) {
         donosService.deletarDonosPorId(id);
     }
-
 }
