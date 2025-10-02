@@ -4,7 +4,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.OptionalInt;
+
 
 @Service
 public class GatosService {
@@ -32,7 +32,11 @@ public class GatosService {
       gatosRepository.deleteById(id);
     }
 
-    public GatosModel atualizarGatos(GatosModel gatos) {
+    public GatosModel editarGatos(GatosModel gatoAtualizado, Long id) {
+        if (gatosRepository.existsById(id)) {
+            gatoAtualizado.setId(id);
+            return gatosRepository.save(gatoAtualizado);
+        }
         return null;
     }
 

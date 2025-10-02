@@ -31,8 +31,10 @@ public class GatosController {
         return gatosService.exibirPorId(id);
         }
 
-    @PutMapping("gatos/editar")
-    public String editarGatos() {return "Editar Gato";}
+    @PutMapping("gatos/editar{id})
+    public GatosModel editarGatos(@RequestBody GatosModel gatoAtualizado, @PathVariable Long id) {
+        return gatosService.editarGatos(gatoAtualizado, id);
+    }
 
     @DeleteMapping("gatos/excluir/{id}")
     public void excluirGatosPorId(@PathVariable Long id) {
