@@ -9,10 +9,8 @@ import java.util.List;
 public class GatosController {
 
     private final GatosService gatosService;
-    private GatosRepository gatosRepository;
 
-    public GatosController(GatosRepository gatosRepository, GatosService gatosService) {
-        this.gatosRepository = gatosRepository;
+    public GatosController(GatosService gatosService) {
         this.gatosService = gatosService;
     }
 
@@ -27,17 +25,17 @@ public class GatosController {
     }
 
     @GetMapping("gatos/exibir/{id}")
-    public GatosModel exibirGatosPorId(@PathVariable Long id) {
+    public GatosModel exibirGatosPorId(@PathVariable long id) {
         return gatosService.exibirPorId(id);
         }
 
-    @PutMapping("gatos/editar{id})
-    public GatosModel editarGatos(@RequestBody GatosModel gatoAtualizado, @PathVariable Long id) {
+    @PutMapping("gatos/editar/{id}")
+    public GatosModel editarGatos(@RequestBody GatosModel gatoAtualizado, @PathVariable long id) {
         return gatosService.editarGatos(gatoAtualizado, id);
     }
 
     @DeleteMapping("gatos/excluir/{id}")
-    public void excluirGatosPorId(@PathVariable Long id) {
+    public void excluirGatosPorId(@PathVariable long id) {
       gatosService.excluirGatosPorId(id);
     }
 
