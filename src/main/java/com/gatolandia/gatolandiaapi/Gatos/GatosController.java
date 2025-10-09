@@ -15,22 +15,22 @@ public class GatosController {
     }
 
     @GetMapping("gatos/exibir")
-    public List<GatosModel> exibirGatos() {
+    public List<GatosDTO> exibirGatos() {
         return gatosService.listarGatos();
     }
 
     @PostMapping("gatos/adicionar")
-    public GatosModel adicionarGatos(@RequestBody GatosModel gatos) {
+    public GatosDTO adicionarGatos(@RequestBody GatosDTO gatos) {
             return gatosService.adicionarGatos(gatos);
     }
 
     @GetMapping("gatos/exibir/{id}")
-    public GatosModel exibirGatosPorId(@PathVariable long id) {
+    public GatosDTO exibirGatosPorId(@PathVariable long id) {
         return gatosService.exibirPorId(id);
         }
 
     @PutMapping("gatos/editar/{id}")
-    public GatosModel editarGatos(@RequestBody GatosModel gatoAtualizado, @PathVariable long id) {
+    public GatosDTO editarGatos(@RequestBody GatosDTO gatoAtualizado, @PathVariable long id) {
         return gatosService.editarGatos(gatoAtualizado, id);
     }
 
