@@ -21,32 +21,33 @@ public class GatosService {
     public List<GatosDTO>  listarGatos() {
         List<GatosModel> gatos = gatosRepository.findAll();
         return gatos.stream()
-                .map(gatosMapper::map)
+                .map(gatosMapper::toDTO)
                 .collect(Collectors.toList());
     }
 
     public GatosDTO exibirPorId(long id) {
         Optional<GatosModel> exibirPorId = gatosRepository.findById(id);
-        return exibirPorId.map(gatosMapper::map).orElse(null);
+        return exibirPorId.map(gatosMapper::toDTO).orElse(null);
     }
 
     public GatosDTO adicionarGatos(GatosDTO gatosDTO) {
-        GatosModel gato = new GatosMapper().map(gatosDTO);
+
+        GatosModel gato = gatosMapper.toModel(gatosDTO);
         gato = gatosRepository.save(gato);
-        return gatosMapper.map(gato);
+        return gatosMapper.toDTO(gato);
     }
 
     public void excluirGatosPorId(long id) {
       gatosRepository.deleteById(id);
     }
 
-    public GatosDTO editarGatos(GatosDTO gatoAtualizado, Long id) {
+    public GatosDTO editarGatos(GatosDTO gatoDTO, Long id) {
         Optional<GatosModel> gatosExistentes = gatosRepository.findById(id);
         if (gatosExistentes.isPresent()) {
-            GatosModel gatosEditado = gatosMapper.map(gatoAtualizado);
+            GatosModel gatosEditado = gatosMapper.toModel(gatoDTO);
             gatosEditado.setId(id);
             gatosEditado = gatosRepository.save(gatosEditado);
-            return gatosMapper.map(gatosEditado);
+            return gatosMapper.toDTO(gatosEditado);
         }
         return null;
     }
