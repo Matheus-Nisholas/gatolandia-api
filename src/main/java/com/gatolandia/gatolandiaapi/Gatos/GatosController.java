@@ -34,8 +34,10 @@ public class GatosController {
     }
 
     @PutMapping("gatos/editar/{id}")
-    public GatosDTO editarGatos(@RequestBody GatosDTO gatoAtualizado, @PathVariable long id) {
-        return gatosService.editarGatos(gatoAtualizado, id);
+    public ResponseEntity<String> editarGatos(@RequestBody GatosDTO gatoAtualizado, @PathVariable long id) {
+        GatosDTO editarGatos = gatosService.editarGatos(gatoAtualizado, id);
+        return ResponseEntity.status(HttpStatus.ACCEPTED)
+                .body("Gato atualizado com sucesso!");
     }
 
     @DeleteMapping("gatos/excluir/{id}")
