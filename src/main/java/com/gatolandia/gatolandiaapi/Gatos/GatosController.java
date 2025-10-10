@@ -35,16 +35,26 @@ public class GatosController {
 
     @PutMapping("gatos/editar/{id}")
     public ResponseEntity<String> editarGatos(@RequestBody GatosDTO gatoAtualizado, @PathVariable long id) {
-        GatosDTO editarGatos = gatosService.editarGatos(gatoAtualizado, id);
-        return ResponseEntity.status(HttpStatus.ACCEPTED)
-                .body("Gato atualizado com sucesso!");
+        if (gatosService.exibirPorId(id) != null) {
+            GatosDTO gatosDTO = gatosService.editarGatos(gatoAtualizado, id);
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body("Gato atualizado com sucesso!");
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("Gato não encontrado!");
+        }
     }
 
     @DeleteMapping("gatos/excluir/{id}")
     public ResponseEntity<String> excluirGatosPorId(@PathVariable long id) {
-        gatosService.excluirGatosPorId(id);
-        return ResponseEntity.status(HttpStatus.ACCEPTED)
-                .body("Gato excluido com sucesso!");
+        if (gatosService.exibirPorId(id) != null) {
+            gatosService.excluirGatosPorId(id);
+            return ResponseEntity.status(HttpStatus.ACCEPTED)
+                    .body("Gato excluido com sucesso!");
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("Gato não encontrado!");
+        }
     }
 
 }
