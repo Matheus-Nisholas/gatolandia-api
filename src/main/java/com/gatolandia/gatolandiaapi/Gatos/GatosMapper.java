@@ -1,10 +1,9 @@
 package com.gatolandia.gatolandiaapi.Gatos;
 
 import org.mapstruct.Mapper;
-import org.springframework.stereotype.Component;
 
-@Component
-@Mapper
+
+@Mapper(componentModel = "spring")
 public interface GatosMapper {
 
     GatosModel toModel(GatosDTO dto);

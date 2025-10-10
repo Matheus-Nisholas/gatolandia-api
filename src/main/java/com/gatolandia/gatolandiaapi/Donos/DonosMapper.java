@@ -1,10 +1,9 @@
 package com.gatolandia.gatolandiaapi.Donos;
 
 import org.mapstruct.Mapper;
-import org.springframework.stereotype.Component;
 
-@Component
-@Mapper
+
+@Mapper(componentModel = "spring")
 public interface DonosMapper {
     DonosModel toModel(DonosDTO dto);
 

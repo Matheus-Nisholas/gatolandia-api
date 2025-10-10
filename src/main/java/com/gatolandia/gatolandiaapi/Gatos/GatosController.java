@@ -1,5 +1,7 @@
 package com.gatolandia.gatolandiaapi.Gatos;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,8 +22,10 @@ public class GatosController {
     }
 
     @PostMapping("gatos/adicionar")
-    public GatosDTO adicionarGatos(@RequestBody GatosDTO gatos) {
-        return gatosService.adicionarGatos(gatos);
+    public ResponseEntity<String> adicionarGatos(@RequestBody GatosDTO gatos) {
+        GatosDTO gatoNovo = gatosService.adicionarGatos(gatos);
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body("Gato adicionado com sucesso!");
     }
 
     @GetMapping("gatos/exibir/{id}")
