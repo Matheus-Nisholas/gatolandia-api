@@ -23,10 +23,10 @@ public class GatosController {
     }
 
     @GetMapping("gatos/exibir/{id}")
-    public ResponseEntity<String> exibirGatosPorId(@PathVariable long id) {
+    public ResponseEntity<?> exibirGatosPorId(@PathVariable long id) {
         GatosDTO gatos = gatosService.exibirPorId(id);
         if (gatos != null) {
-            return ResponseEntity.status(HttpStatus.OK).body("Gatos exibido com sucesso");
+            return ResponseEntity.status(HttpStatus.OK).body(gatos);
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body("Nenhum Gatos encontrado");

@@ -23,10 +23,10 @@ public class DonosController {
     }
 
     @GetMapping("donos/exibir/{id}")
-    public ResponseEntity<String> exibirDonosPorId(@PathVariable long id) {
+    public ResponseEntity<?> exibirDonosPorId(@PathVariable long id) {
         DonosDTO dono = donosService.exibirPorId(id);
         if (dono != null) {
-            return ResponseEntity.ok().body("Dono exibido com sucesso!");
+            return ResponseEntity.ok().body(dono);
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
                     .body("Nenhum dono encontrado!");
