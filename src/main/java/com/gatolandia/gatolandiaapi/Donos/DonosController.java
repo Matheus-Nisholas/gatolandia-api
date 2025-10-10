@@ -17,8 +17,20 @@ public class DonosController {
     }
 
     @GetMapping("donos/exibir")
-    public List<DonosDTO> exibirDonos() {
-        return donosService.listarDonos();
+    public ResponseEntity<List<DonosDTO>> exibirDonos() {
+        List<DonosDTO> donos = donosService.listarDonos();
+        return ResponseEntity.status(HttpStatus.OK).body(donos);
+    }
+
+    @GetMapping("donos/exibir/{id}")
+    public ResponseEntity<String> exibirDonosPorId(@PathVariable long id) {
+        DonosDTO dono = donosService.exibirPorId(id);
+        if (dono != null) {
+            return ResponseEntity.ok().body("Dono exibido com sucesso!");
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("Nenhum dono encontrado!");
+        }
     }
 
     @PostMapping("donos/adicionar")
@@ -26,11 +38,6 @@ public class DonosController {
         DonosDTO adicionarDonos = donosService.adicionarDonos(donosDTO);
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body("Dono adicionado com sucesso!");
-    }
-
-    @GetMapping("donos/exibir/{id}")
-    public DonosDTO exibirDonosPorId(@PathVariable long id) {
-        return donosService.exibirPorId(id);
     }
 
     @PutMapping("donos/editar/{id}")

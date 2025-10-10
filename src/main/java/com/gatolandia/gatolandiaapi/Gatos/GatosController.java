@@ -17,8 +17,20 @@ public class GatosController {
     }
 
     @GetMapping("gatos/exibir")
-    public List<GatosDTO> exibirGatos() {
-        return gatosService.listarGatos();
+    public ResponseEntity<List<GatosDTO>> exibirGatos() {
+        List<GatosDTO> gatos = gatosService.listarGatos();
+        return ResponseEntity.status(HttpStatus.OK).body(gatos);
+    }
+
+    @GetMapping("gatos/exibir/{id}")
+    public ResponseEntity<String> exibirGatosPorId(@PathVariable long id) {
+        GatosDTO gatos = gatosService.exibirPorId(id);
+        if (gatos != null) {
+            return ResponseEntity.status(HttpStatus.OK).body("Gatos exibido com sucesso");
+        } else {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("Nenhum Gatos encontrado");
+        }
     }
 
     @PostMapping("gatos/adicionar")
@@ -26,11 +38,6 @@ public class GatosController {
         GatosDTO gatoNovo = gatosService.adicionarGatos(gatos);
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body("Gato adicionado com sucesso!");
-    }
-
-    @GetMapping("gatos/exibir/{id}")
-    public GatosDTO exibirGatosPorId(@PathVariable long id) {
-        return gatosService.exibirPorId(id);
     }
 
     @PutMapping("gatos/editar/{id}")
