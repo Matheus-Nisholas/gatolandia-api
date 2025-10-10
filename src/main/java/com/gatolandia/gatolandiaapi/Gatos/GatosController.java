@@ -41,8 +41,10 @@ public class GatosController {
     }
 
     @DeleteMapping("gatos/excluir/{id}")
-    public void excluirGatosPorId(@PathVariable long id) {
+    public ResponseEntity<String> excluirGatosPorId(@PathVariable long id) {
         gatosService.excluirGatosPorId(id);
+        return ResponseEntity.status(HttpStatus.ACCEPTED)
+                .body("Gato excluido com sucesso!");
     }
 
 }
