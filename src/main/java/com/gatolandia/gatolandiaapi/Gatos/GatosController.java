@@ -29,8 +29,10 @@ public class GatosController {
     }
 
     @GetMapping("gatos/exibir/{id}")
-    public GatosDTO exibirGatosPorId(@PathVariable long id) {
-        return gatosService.exibirPorId(id);
+    public ResponseEntity exibirGatosPorId(@PathVariable long id) {
+        GatosDTO exibirPorId = gatosService.exibirPorId(id);
+        return  ResponseEntity.status(HttpStatus.OK)
+                .body("Gato encontrado: " + exibirPorId);
     }
 
     @PutMapping("gatos/editar/{id}")
