@@ -15,27 +15,27 @@ public class DonosController {
     }
 
     @GetMapping("donos/exibir")
-    public List<DonosModel> exibirDonos() {
-        return donosService.exibirDonos();
+    public List<DonosDTO> exibirDonos() {
+        return donosService.listarDonos();
     }
 
     @PostMapping("donos/adicionar")
-    public DonosModel adicionarDonos(@RequestBody DonosModel donosModel) {
-        return donosService.adicionarDonos(donosModel);
+    public DonosDTO adicionarDonos(@RequestBody DonosDTO donosDTO) {
+        return donosService.adicionarDonos(donosDTO);
     }
 
     @GetMapping("donos/exibir/{id}")
-    public DonosModel exibirDonosPorId(@PathVariable long id) {
-        return donosService.exibirDonoPorId(id);
+    public DonosDTO exibirDonosPorId(@PathVariable long id) {
+        return donosService.exibirPorId(id);
     }
 
     @PutMapping("donos/editar/{id}")
-    public DonosModel editarDonos(@RequestBody DonosModel donoAtualizado, @PathVariable long id) {
-        return donosService.editarDono(donoAtualizado, id);
+    public DonosDTO editarDonos(@RequestBody DonosDTO donoAtualizado, @PathVariable long id) {
+        return donosService.editarDonos(donoAtualizado, id);
     }
 
     @DeleteMapping("donos/excluir/{id}")
     public void excluirDonosPorId(@PathVariable long id) {
-        donosService.deletarDonosPorId(id);
+        donosService.excluirDonosPorId(id);
     }
 }

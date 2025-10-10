@@ -1,3 +1,0 @@
-
-ALTER TABLE  tb_donos
-ADD COLUMN bairro VARCHAR(50);
