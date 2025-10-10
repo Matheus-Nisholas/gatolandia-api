@@ -1,8 +1,5 @@
 package com.gatolandia.gatolandiaapi.Donos;
 
-import com.gatolandia.gatolandiaapi.Gatos.GatosDTO;
-import com.gatolandia.gatolandiaapi.Gatos.GatosModel;
-import com.gatolandia.gatolandiaapi.Gatos.GatosRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -20,7 +17,7 @@ public class DonosService {
         this.donosMapper = donosMapper;
     }
 
-    public List<DonosDTO>  listarDonos() {
+    public List<DonosDTO> listarDonos() {
         List<DonosModel> gatos = donosRepository.findAll();
         return gatos.stream()
                 .map(donosMapper::toDTO)

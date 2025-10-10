@@ -41,6 +41,6 @@ public class DonosModel {
 
     @JsonIgnore
     @OneToMany(mappedBy = "donos")
-    private List <GatosModel> listaGatos;
+    private List<GatosModel> listaGatos;
 
 }

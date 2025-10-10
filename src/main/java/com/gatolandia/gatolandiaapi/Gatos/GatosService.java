@@ -18,7 +18,7 @@ public class GatosService {
         this.gatosRepository = gatosRepository;
     }
 
-    public List<GatosDTO>  listarGatos() {
+    public List<GatosDTO> listarGatos() {
         List<GatosModel> gatos = gatosRepository.findAll();
         return gatos.stream()
                 .map(gatosMapper::toDTO)
@@ -38,7 +38,7 @@ public class GatosService {
     }
 
     public void excluirGatosPorId(long id) {
-      gatosRepository.deleteById(id);
+        gatosRepository.deleteById(id);
     }
 
     public GatosDTO editarGatos(GatosDTO gatoDTO, Long id) {

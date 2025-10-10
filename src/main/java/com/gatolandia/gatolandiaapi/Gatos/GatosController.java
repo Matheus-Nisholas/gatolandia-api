@@ -21,13 +21,13 @@ public class GatosController {
 
     @PostMapping("gatos/adicionar")
     public GatosDTO adicionarGatos(@RequestBody GatosDTO gatos) {
-            return gatosService.adicionarGatos(gatos);
+        return gatosService.adicionarGatos(gatos);
     }
 
     @GetMapping("gatos/exibir/{id}")
     public GatosDTO exibirGatosPorId(@PathVariable long id) {
         return gatosService.exibirPorId(id);
-        }
+    }
 
     @PutMapping("gatos/editar/{id}")
     public GatosDTO editarGatos(@RequestBody GatosDTO gatoAtualizado, @PathVariable long id) {
@@ -36,7 +36,7 @@ public class GatosController {
 
     @DeleteMapping("gatos/excluir/{id}")
     public void excluirGatosPorId(@PathVariable long id) {
-      gatosService.excluirGatosPorId(id);
+        gatosService.excluirGatosPorId(id);
     }
 
 }
