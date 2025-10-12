@@ -1,5 +1,7 @@
 package com.gatolandia.gatolandiaapi.Gatos;
 
+import com.gatolandia.gatolandiaapi.common.ApiMessageResponse;
+
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -60,7 +62,7 @@ public class GatosController {
             return ResponseEntity.status(HttpStatus.OK).body(gatos);
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body("Nenhum Gatos encontrado");
+                    .body(ApiMessageResponse.of("GATO_NAO_ENCONTRADO", "Nenhum gato encontrado."));
         }
     }
 
@@ -71,10 +73,10 @@ public class GatosController {
             @ApiResponse(responseCode = "201", description = "Gato cadastrado com sucesso"),
             @ApiResponse(responseCode = "400", description = "Dados inválidos")
     })
-    public ResponseEntity<String> adicionarGatos(@RequestBody GatosDTO gatos) {
-        GatosDTO gatoNovo = gatosService.adicionarGatos(gatos);
+    public ResponseEntity<ApiMessageResponse> adicionarGatos(@RequestBody GatosDTO gatos) {
+        gatosService.adicionarGatos(gatos);
         return ResponseEntity.status(HttpStatus.CREATED)
-                .body("Gato adicionado com sucesso!");
+                .body(ApiMessageResponse.of("GATO_CADASTRADO", "Gato adicionado com sucesso."));
     }
 
     @PutMapping("gatos/editar/{id}")
@@ -84,14 +86,14 @@ public class GatosController {
             @ApiResponse(responseCode = "200", description = "Gato atualizado com sucesso"),
             @ApiResponse(responseCode = "404", description = "Gato não encontrado")
     })
-    public ResponseEntity<String> editarGatos(@RequestBody GatosDTO gatoAtualizado, @PathVariable long id) {
-        if (gatosService.exibirPorId(id) != null) {
-            GatosDTO gatosDTO = gatosService.editarGatos(gatoAtualizado, id);
+    public ResponseEntity<ApiMessageResponse> editarGatos(@RequestBody GatosDTO gatoAtualizado, @PathVariable long id) {
+        GatosDTO gatoAtualizadoResponse = gatosService.editarGatos(gatoAtualizado, id);
+        if (gatoAtualizadoResponse != null) {
             return ResponseEntity.status(HttpStatus.OK)
-                    .body("Gato atualizado com sucesso!");
+                    .body(ApiMessageResponse.of("GATO_ATUALIZADO", "Gato atualizado com sucesso."));
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body("Gato não encontrado!");
+                    .body(ApiMessageResponse.of("GATO_NAO_ENCONTRADO", "Gato não encontrado."));
         }
     }
 
@@ -102,14 +104,13 @@ public class GatosController {
             @ApiResponse(responseCode = "202", description = "Gato excluído"),
             @ApiResponse(responseCode = "404", description = "Gato não encontrado")
     })
-    public ResponseEntity<String> excluirGatosPorId(@PathVariable long id) {
-        if (gatosService.exibirPorId(id) != null) {
-            gatosService.excluirGatosPorId(id);
+    public ResponseEntity<ApiMessageResponse> excluirGatosPorId(@PathVariable long id) {
+        if (gatosService.excluirGatosPorId(id)) {
             return ResponseEntity.status(HttpStatus.ACCEPTED)
-                    .body("Gato excluido com sucesso!");
+                    .body(ApiMessageResponse.of("GATO_EXCLUIDO", "Gato excluído com sucesso."));
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body("Gato não encontrado!");
+                    .body(ApiMessageResponse.of("GATO_NAO_ENCONTRADO", "Gato não encontrado."));
         }
     }
 
