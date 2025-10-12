@@ -36,7 +36,7 @@ public class DonosModel {
     @Column(unique = true)
     private String celular;
 
-    @Column(name = "possuiGatos")
+    @Column(name = "possui_gatos")
     private boolean possuiGatos;
 
     @JsonIgnore

@@ -1,5 +1,7 @@
 package com.gatolandia.gatolandiaapi.Donos;
 
+import com.gatolandia.gatolandiaapi.common.ApiMessageResponse;
+
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -60,7 +62,7 @@ public class DonosController {
             return ResponseEntity.ok().body(dono);
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body("Nenhum dono encontrado!");
+                    .body(ApiMessageResponse.of("DONO_NAO_ENCONTRADO", "Nenhum dono encontrado."));
         }
     }
 
@@ -71,10 +73,10 @@ public class DonosController {
             @ApiResponse(responseCode = "201", description = "Dono cadastrado"),
             @ApiResponse(responseCode = "400", description = "Dados inválidos")
     })
-    public ResponseEntity<String> adicionarDonos(@RequestBody DonosDTO donosDTO) {
-        DonosDTO adicionarDonos = donosService.adicionarDonos(donosDTO);
+    public ResponseEntity<ApiMessageResponse> adicionarDonos(@RequestBody DonosDTO donosDTO) {
+        donosService.adicionarDonos(donosDTO);
         return ResponseEntity.status(HttpStatus.CREATED)
-                .body("Dono adicionado com sucesso!");
+                .body(ApiMessageResponse.of("DONO_CADASTRADO", "Dono adicionado com sucesso."));
     }
 
     @PutMapping("donos/editar/{id}")
@@ -84,14 +86,14 @@ public class DonosController {
             @ApiResponse(responseCode = "202", description = "Dono atualizado"),
             @ApiResponse(responseCode = "404", description = "Dono não encontrado")
     })
-    public ResponseEntity<String> editarDonos(@RequestBody DonosDTO donoAtualizado, @PathVariable long id) {
-        if (donosService.exibirPorId(id) != null) {
-            DonosDTO donosDTO = donosService.editarDonos(donoAtualizado, id);
+    public ResponseEntity<ApiMessageResponse> editarDonos(@RequestBody DonosDTO donoAtualizado, @PathVariable long id) {
+        DonosDTO donoAtualizadoResponse = donosService.editarDonos(donoAtualizado, id);
+        if (donoAtualizadoResponse != null) {
             return  ResponseEntity.status(HttpStatus.ACCEPTED)
-                    .body("Donos atualizado com sucesso!");
+                    .body(ApiMessageResponse.of("DONO_ATUALIZADO", "Dono atualizado com sucesso."));
         } else{
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body("Dono não encontrado!");
+                    .body(ApiMessageResponse.of("DONO_NAO_ENCONTRADO", "Dono não encontrado."));
         }
     }
 
@@ -102,13 +104,12 @@ public class DonosController {
             @ApiResponse(responseCode = "200", description = "Dono excluído"),
             @ApiResponse(responseCode = "404", description = "Dono não encontrado")
     })
-    public ResponseEntity<String> excluirDonosPorId(@PathVariable long id) {
-        if (donosService.exibirPorId(id) != null) {
-            donosService.excluirDonosPorId(id);
-            return ResponseEntity.ok("Dono de (ID)"+id+" excluido com sucesso!");
+    public ResponseEntity<ApiMessageResponse> excluirDonosPorId(@PathVariable long id) {
+        if (donosService.excluirDonosPorId(id)) {
+            return ResponseEntity.ok(ApiMessageResponse.of("DONO_EXCLUIDO", "Dono de ID " + id + " excluído com sucesso."));
         } else {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body("Dono não encontrado!");
+                    .body(ApiMessageResponse.of("DONO_NAO_ENCONTRADO", "Dono não encontrado."));
         }
     }
 }

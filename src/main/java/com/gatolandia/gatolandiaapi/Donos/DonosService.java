@@ -36,8 +36,13 @@ public class DonosService {
         return donosMapper.toDTO(dono);
     }
 
-    public void excluirDonosPorId(long id) {
-        donosRepository.deleteById(id);
+    public boolean excluirDonosPorId(long id) {
+        Optional<DonosModel> donoExistente = donosRepository.findById(id);
+        if (donoExistente.isPresent()) {
+            donosRepository.delete(donoExistente.get());
+            return true;
+        }
+        return false;
     }
 
     public DonosDTO editarDonos(DonosDTO donosDTO, Long id) {

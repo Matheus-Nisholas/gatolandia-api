@@ -37,8 +37,13 @@ public class GatosService {
         return gatosMapper.toDTO(gato);
     }
 
-    public void excluirGatosPorId(long id) {
-        gatosRepository.deleteById(id);
+    public boolean excluirGatosPorId(long id) {
+        Optional<GatosModel> gatoExistente = gatosRepository.findById(id);
+        if (gatoExistente.isPresent()) {
+            gatosRepository.delete(gatoExistente.get());
+            return true;
+        }
+        return false;
     }
 
     public GatosDTO editarGatos(GatosDTO gatoDTO, Long id) {
