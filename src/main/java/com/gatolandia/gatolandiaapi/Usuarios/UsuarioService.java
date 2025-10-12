@@ -16,7 +16,26 @@ public class UsuarioService {
         this.passwordEncoder = passwordEncoder;
     }
 
+    /**
+     * Registra um novo usuário com role padrão de {@code ROLE_USER}.
+     *
+     * @param username nome do usuário
+     * @param senha    senha em texto plano que será codificada
+     * @return usuário persistido
+     */
     public UsuarioModel registrarUsuario(String username, String senha) {
+        return registrarUsuarioComRole(username, senha, "ROLE_USER");
+    }
+
+    /**
+     * Registra um usuário permitindo definir a role desejada.
+     *
+     * @param username nome do usuário
+     * @param senha    senha em texto plano que será codificada
+     * @param role     permissão que o usuário terá na aplicação
+     * @return usuário persistido
+     */
+    public UsuarioModel registrarUsuarioComRole(String username, String senha, String role) {
         if (usuarioRepository.existsByUsername(username)) {
             throw new IllegalArgumentException("Usuário já cadastrado");
         }
@@ -24,7 +43,7 @@ public class UsuarioService {
         UsuarioModel usuario = UsuarioModel.builder()
                 .username(username)
                 .password(passwordEncoder.encode(senha))
-                .role("ROLE_USER")
+                .role(role)
                 .build();
 
         return usuarioRepository.save(usuario);
