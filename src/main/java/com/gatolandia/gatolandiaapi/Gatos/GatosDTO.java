@@ -1,6 +1,7 @@
 package com.gatolandia.gatolandiaapi.Gatos;
 
 import com.gatolandia.gatolandiaapi.Donos.DonosModel;
+import com.gatolandia.gatolandiaapi.Gatos.StatusAcolhimento;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -32,5 +33,8 @@ public class GatosDTO {
 
     @Schema(description = "Dono associado ao gato")
     private DonosModel donos;
+
+    @Schema(description = "Status atual do acolhimento do gato", example = "AGUARDANDO")
+    private StatusAcolhimento statusAcolhimento;
 
 }
