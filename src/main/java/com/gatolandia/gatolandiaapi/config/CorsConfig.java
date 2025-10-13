@@ -41,9 +41,15 @@ public class CorsConfig {
     }
 
     private List<String> parseAllowedOrigins() {
-        return Arrays.stream(allowedOrigins.split(","))
+        List<String> origins = Arrays.stream(allowedOrigins.split(","))
                 .map(String::trim)
                 .filter(origin -> !origin.isEmpty())
                 .collect(Collectors.toList());
+
+        if (origins.isEmpty()) {
+            return List.of("*");
+        }
+
+        return origins;
     }
 }
