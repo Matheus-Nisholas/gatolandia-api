@@ -33,6 +33,9 @@ public class GatosService {
     public GatosDTO adicionarGatos(GatosDTO gatosDTO) {
 
         GatosModel gato = gatosMapper.toModel(gatosDTO);
+        if (gato.getStatusAcolhimento() == null) {
+            gato.setStatusAcolhimento(StatusAcolhimento.AGUARDANDO);
+        }
         gato = gatosRepository.save(gato);
         return gatosMapper.toDTO(gato);
     }
@@ -51,6 +54,9 @@ public class GatosService {
         if (gatosExistentes.isPresent()) {
             GatosModel gatosEditado = gatosMapper.toModel(gatoDTO);
             gatosEditado.setId(id);
+            if (gatosEditado.getStatusAcolhimento() == null) {
+                gatosEditado.setStatusAcolhimento(StatusAcolhimento.AGUARDANDO);
+            }
             gatosEditado = gatosRepository.save(gatosEditado);
             return gatosMapper.toDTO(gatosEditado);
         }

@@ -1,6 +1,9 @@
 package com.gatolandia.gatolandiaapi.Gatos;
 
 import com.gatolandia.gatolandiaapi.Donos.DonosModel;
+import com.gatolandia.gatolandiaapi.Gatos.StatusAcolhimento;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -26,6 +29,9 @@ public class GatosModel {
     private int idade;
 
     private boolean castrado;
+
+    @Enumerated(EnumType.STRING)
+    private StatusAcolhimento statusAcolhimento = StatusAcolhimento.AGUARDANDO;
 
     @ManyToOne
     @JoinColumn(name = "tb_donos_id")
