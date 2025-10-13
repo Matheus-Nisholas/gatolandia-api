@@ -21,6 +21,8 @@ WORKDIR /app
 # Copy the built jar from the build stage
 COPY --from=build /workspace/app/target/*.jar app.jar
 
+ARG CORS_ALLOWED_ORIGINS=http://localhost:3000
+ENV CORS_ALLOWED_ORIGINS=${CORS_ALLOWED_ORIGINS}
 ENV JAVA_OPTS=""
 EXPOSE 8080
 
